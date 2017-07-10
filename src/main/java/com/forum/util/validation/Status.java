@@ -4,11 +4,14 @@ package com.forum.util.validation;
  * @author nam
  *
  */
-public class ValidationStatus {
+public class Status {
 private String code, message;
 
+public Status() {
+    super();
+}
 
-public ValidationStatus(String code, String message) {
+public Status(String code, String message) {
 	super();
 	this.code = code;
 	this.message = message;
