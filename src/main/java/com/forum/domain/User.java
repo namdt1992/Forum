@@ -39,8 +39,7 @@ public class User extends AbstractEntity {
 
 	@Column(name = "hash_password")
 	private String hashPassword;
-	@Column(name = "display_name")
-	private String displayName;
+	
 	@OneToOne(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
 	fetch = FetchType.LAZY)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
@@ -50,11 +49,10 @@ public class User extends AbstractEntity {
 	public User() {
 	}
 
-	public User(String id, String name, String hashPassword, String displayName) {
+	public User(String id, String name, String hashPassword) {
 		this.id = id;
 		this.name = name;
 		this.hashPassword = hashPassword;
-		this.displayName = displayName;
 	}
 
 	@JsonView(Public.class)
@@ -82,15 +80,6 @@ public class User extends AbstractEntity {
 
 	public void setHashPassword(String hashPassword) {
 		this.hashPassword = hashPassword;
-	}
-
-	@JsonView(Public.class)
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
 	}
 
 	@JsonView(Public.class)
