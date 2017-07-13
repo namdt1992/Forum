@@ -32,7 +32,7 @@ public class User extends AbstractEntity {
 	@Column(name = "id")
 	@GeneratedValue(generator = "user_value_generator", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "users_value_generator", schema = DatabaseConstant.schema, sequenceName = "users_seq")
-	private String id;
+	private Long id;
 
 	@Column(name = "name")
 	private String name;
@@ -50,7 +50,7 @@ public class User extends AbstractEntity {
 	public User() {
 	}
 
-	public User(String id, String name, String hashPassword, String displayName) {
+	public User(Long id, String name, String hashPassword, String displayName) {
 		this.id = id;
 		this.name = name;
 		this.hashPassword = hashPassword;
@@ -58,11 +58,11 @@ public class User extends AbstractEntity {
 	}
 
 	@JsonView(Public.class)
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

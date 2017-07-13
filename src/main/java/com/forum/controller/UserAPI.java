@@ -3,24 +3,8 @@
  */
 package com.forum.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.forum.configuration.constant.HttpConstant;
-import com.forum.domain.User;
-import com.forum.service.user.UserService;
-import com.forum.util.Jackson;
-import com.forum.util.validation.QueryStatus;
-import com.forum.util.validation.RepositoryStatus;
-import com.forum.util.validation.Status;
-import com.forum.util.view.Public;
 
 /**
  * @author NamDT8
@@ -30,9 +14,9 @@ import com.forum.util.view.Public;
 @RestController
 @RequestMapping("/api/user")
 public class UserAPI extends AbstractAPI {
+	/*
 @Autowired
 private UserService userRepository;
-
 @GetMapping(value = "/_findOne		/all",
 produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public ResponseEntity<String> findAll() {
@@ -51,5 +35,5 @@ return new ResponseEntity<String>
         status.getObject()),
 		Public.class), HttpStatus.OK);
 }
-
+*/
 }

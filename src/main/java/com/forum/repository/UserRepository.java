@@ -10,6 +10,5 @@ import com.forum.domain.User;
  *
  */
 public interface UserRepository extends AbstractRepository<User> {
-	
 
 }
