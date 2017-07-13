@@ -82,7 +82,7 @@ public class User extends AbstractEntity {
 		this.hashPassword = hashPassword;
 	}
 
-	@JsonView(Public.class)
+@JsonView(Public.class)
 	public Profile getProfile() {
 		return profile;
 	}

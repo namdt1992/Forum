@@ -65,7 +65,7 @@ public Profile(String id, String displayName, String email, String phone, String
 }
 
 
-@JsonView(Public.class)
+@JsonView(Private.class)
 public String getId() {
 	return id;
 }
@@ -83,7 +83,7 @@ public void setDisplayName(String displayName) {
 	this.displayName = displayName;
 }
 
-@JsonView(Public.class)
+@JsonView(Private.class)
 public String getEmail() {
 	return email;
 }
@@ -92,7 +92,7 @@ public void setEmail(String email) {
 	this.email = email;
 }
 
-@JsonView(Public.class)
+@JsonView(Private.class)
 public String getPhone() {
 	return phone;
 }
@@ -101,7 +101,7 @@ public void setPhone(String phone) {
 	this.phone = phone;
 }
 
-@JsonView(Public.class)
+@JsonView(Private.class)
 public String getAddress() {
 	return address;
 }
