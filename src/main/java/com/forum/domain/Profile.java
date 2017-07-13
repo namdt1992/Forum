@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.forum.configuration.constant.DatabaseConstant;
+import com.forum.util.view.Private;
 import com.forum.util.view.Public;
 
 /**
