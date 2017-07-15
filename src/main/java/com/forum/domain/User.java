@@ -57,7 +57,7 @@ public class User extends AbstractEntity {
 		this.displayName = displayName;
 	}
 
-	@JsonView(Public.class)
+	@JsonView(Private.class)
 	public Long getId() {
 		return id;
 	}

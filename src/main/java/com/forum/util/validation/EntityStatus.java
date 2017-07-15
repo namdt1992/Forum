@@ -11,43 +11,43 @@ import com.forum.domain.AbstractEntity;
  * @author NamDT8
  *
  */
-public class QueryStatus <T extends AbstractEntity> extends Status {
+public class EntityStatus <T extends AbstractEntity> extends Status {
 
-    private Integer index;
+   private Integer index;
     private Integer count;
     private List<T> data;
     private Object object;
 
-    public QueryStatus() {
+    public EntityStatus() {
     }
 
-    public QueryStatus(String code, String message) {
+    public EntityStatus(String code, String message) {
         super(code, message);
     }
 
-    public QueryStatus(String code, String message, Integer index) {
+    public EntityStatus(String code, String message, Integer index) {
         super(code, message);
         this.index = index;
     }
 
-    public QueryStatus(String code, String message, Integer count, List<T> data) {
+    public EntityStatus(String code, String message, Integer count, List<T> data) {
         super(code, message);
         this.count = count;
         this.data = data;
     }
 
-    public QueryStatus(String code, String message, List<T> data) {
+    public EntityStatus(String code, String message, List<T> data) {
         super(code, message);
         this.data = data;
     }
 
-    public QueryStatus(String code, String message, Integer count, Object object) {
+    public EntityStatus(String code, String message, Integer count, Object object) {
         super(code, message);
         this.count = count;
         this.object = object;
     }
 
-    public QueryStatus(String code, String message, Object object) {
+    public EntityStatus(String code, String message, Object object) {
         super(code, message);
         this.object = object;
     }
