@@ -31,7 +31,7 @@ public class User extends AbstractEntity {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(generator = "user_value_generator", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "users_value_generator", schema = DatabaseConstant.schema, sequenceName = "users_seq")
+	@SequenceGenerator(name = "user_value_generator", schema = DatabaseConstant.schema, sequenceName = "users_seq")
 	private Long id;
 
 	@Column(name = "name")
