@@ -1,18 +1,23 @@
 package com.forum.util.validation;
 
+import com.forum.service.AbstractService;
+
 /**
  * @author nam
  *
  */
-public class Status {
+public class Status extends AbstractService {
 private String code, message;
 
 public Status() {
-    super();
+}
+
+public Status (String code) {
+	this.code = code;
+	this.message = findMessageByCode(code);
 }
 
 public Status(String code, String message) {
-	super();
 	this.code = code;
 	this.message = message;
 }
