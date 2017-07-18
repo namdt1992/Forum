@@ -25,7 +25,7 @@ import com.forum.util.view.Public;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserAPI extends AbstractAPI {
+public class UserAPI {
 	
 @Autowired
 private UserService userRepository;
