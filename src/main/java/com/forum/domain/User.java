@@ -24,14 +24,14 @@ import com.forum.util.view.Public;
  */
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(generator = "user_value_generator", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "users_value_generator", schema = DatabaseConstant.schema, sequenceName = "users_seq")
+	@SequenceGenerator(name = "user_value_generator", schema = DatabaseConstant.schema, sequenceName = "users_seq")
 	private Long id;
 
 	@Column(name = "name")
@@ -41,6 +41,7 @@ public class User extends AbstractEntity {
 	private String hashPassword;
 	@Column(name = "display_name")
 	private String displayName;
+	
 	@OneToOne(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
 	fetch = FetchType.LAZY)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)

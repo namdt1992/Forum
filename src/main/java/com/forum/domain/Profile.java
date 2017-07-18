@@ -31,7 +31,8 @@ public class Profile extends AbstractEntity {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(generator = "profile_value_generator",
-    strategy = GenerationType.SEQUENCE)@SequenceGenerator(name = "profile_value_generator", schema = DatabaseConstant.schema,
+    strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "profile_value_generator", schema = DatabaseConstant.schema,
 	sequenceName = "profile_seq")
 	private String id;
 	
