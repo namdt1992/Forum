@@ -40,7 +40,7 @@ return new RepositoryStatus<Long>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAG
 		return new RepositoryStatus<Long>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
 	}
 	} catch (Exception exception) {
-ExceptionStatus exceptionStatus = handleException.check(exception);
+ExceptionStatus exceptionStatus = handleException.toHttpStatus(exception);
 return new RepositoryStatus<Long>(exceptionStatus.getCode(), exceptionStatus.getMessage());
 	}
 	}
@@ -50,7 +50,7 @@ return new RepositoryStatus<Long>(exceptionStatus.getCode(), exceptionStatus.get
 			userRepository.delete(id);
 			return new RepositoryStatus<Boolean>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, Boolean.TRUE);
 		} catch (Exception exception) {
-			ExceptionStatus exceptionStatus = handleException.check(exception);
+			ExceptionStatus exceptionStatus = handleException.toHttpStatus(exception);
 			return new RepositoryStatus<Boolean>(exceptionStatus.getCode(), exceptionStatus.getMessage(), Boolean.FALSE);
 		}
 	}
@@ -64,7 +64,7 @@ return new RepositoryStatus<Long>(exceptionStatus.getCode(), exceptionStatus.get
 				return new RepositoryStatus<List<User>>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
 			}
 		} catch (Exception exception) {
-			ExceptionStatus exceptionStatus = handleException.check(exception);
+			ExceptionStatus exceptionStatus = handleException.toHttpStatus(exception);
 			return new RepositoryStatus<List<User>> (exceptionStatus.getCode(), exceptionStatus.getMessage());
 		}
 	}
@@ -78,7 +78,7 @@ return new RepositoryStatus<Long>(exceptionStatus.getCode(), exceptionStatus.get
 				return new RepositoryStatus<User>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
 			}
 		} catch (Exception exception) {
-			ExceptionStatus exceptionStatus = handleException.check(exception);
+			ExceptionStatus exceptionStatus = handleException.toHttpStatus(exception);
 			return new RepositoryStatus<User> (exceptionStatus.getCode(), exceptionStatus.getMessage());
 		}
 		}

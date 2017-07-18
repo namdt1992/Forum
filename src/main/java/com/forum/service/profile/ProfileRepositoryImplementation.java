@@ -29,7 +29,7 @@ return new RepositoryStatus<Profile>(HttpConstant.CODE_SUCCESS, HttpConstant.MES
 		return new RepositoryStatus<Profile>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
 	}
 	} catch (Exception exception) {
-ExceptionStatus exceptionStatus = handleException.check(exception);
+ExceptionStatus exceptionStatus = handleException.toHttpStatus(exception);
 return new RepositoryStatus<Profile>(exceptionStatus.getCode(), exceptionStatus.getMessage());
 	}
 }	
@@ -39,7 +39,7 @@ public RepositoryStatus<Boolean> delete (Long id) {
 		profileRepository.delete(id);
 		return new RepositoryStatus<Boolean>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, Boolean.TRUE);
 	} catch (Exception exception) {
-		ExceptionStatus exceptionStatus = handleException.check(exception);
+		ExceptionStatus exceptionStatus = handleException.toHttpStatus(exception);
 		return new RepositoryStatus<Boolean>(exceptionStatus.getCode(), exceptionStatus.getMessage(), Boolean.FALSE);
 	}
 }
@@ -53,7 +53,7 @@ public RepositoryStatus<Profile> findOne(long id) {
 			return new RepositoryStatus<Profile>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
 		}
 	} catch (Exception exception) {
-		ExceptionStatus exceptionStatus = handleException.check(exception);
+		ExceptionStatus exceptionStatus = handleException.toHttpStatus(exception);
 		return new RepositoryStatus<Profile> (exceptionStatus.getCode(), exceptionStatus.getMessage());
 	}
 	}
