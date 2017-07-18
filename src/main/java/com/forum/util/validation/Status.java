@@ -60,4 +60,8 @@ public HttpStatus getHttpStatus() {
 	return httpStatus;
 }
 
+public boolean isSuccess() {
+	return httpStatus.equals(HttpStatus.OK);
+}
+
 }

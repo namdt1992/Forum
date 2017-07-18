@@ -18,6 +18,10 @@ public class RepositoryStatus <T extends Object> extends Status {
         this.object = object;
     }
     
+    public RepositoryStatus(HttpStatus status) {
+    	super(status);
+    }
+    
     public RepositoryStatus(HttpStatus httpStatus, T object) {
     	super(httpStatus);
     	this.object = object;
