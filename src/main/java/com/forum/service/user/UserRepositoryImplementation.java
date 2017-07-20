@@ -6,14 +6,13 @@ package com.forum.service.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.forum.configuration.constant.HttpConstant;
 import com.forum.domain.User;
 import com.forum.repository.UserRepository;
-import com.forum.service.HandleException;
-import com.forum.util.validation.ExceptionStatus;
+import com.forum.service.AbstractService;
 import com.forum.util.validation.RepositoryStatus;
 
 /**
@@ -23,63 +22,48 @@ import com.forum.util.validation.RepositoryStatus;
 
 @Repository
 @Transactional
-public class UserRepositoryImplementation implements UserService {
+public class UserRepositoryImplementation extends AbstractService implements UserService  {
 	
 @Autowired
 private UserRepository userRepository;
 
-@Autowired
-private HandleException handleException;
-
+@Override
 public RepositoryStatus<Long> save(User user) {
 	try {
 		user = userRepository.save(user);
-	if (user != null) {
-return new RepositoryStatus<Long>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, user.getId());
-	} else {
-		return new RepositoryStatus<Long>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
-	}
+return user != null ? new RepositoryStatus<Long>(HttpStatus.OK, user.getId()) : new RepositoryStatus<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 	} catch (Exception exception) {
-ExceptionStatus exceptionStatus = handleException.check(exception);
-return new RepositoryStatus<Long>(exceptionStatus.getCode(), exceptionStatus.getMessage());
+return new RepositoryStatus<Long>(handleException(exception));
 	}
 	}
 	
+	@Override
 	public RepositoryStatus<Boolean> delete (Long id) {
 		try {
 			userRepository.delete(id);
-			return new RepositoryStatus<Boolean>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, Boolean.TRUE);
+			return new RepositoryStatus<Boolean>(HttpStatus.OK, true);
 		} catch (Exception exception) {
-			ExceptionStatus exceptionStatus = handleException.check(exception);
-			return new RepositoryStatus<Boolean>(exceptionStatus.getCode(), exceptionStatus.getMessage(), Boolean.FALSE);
+			return new RepositoryStatus<Boolean>(handleException(exception));
 		}
 	}
 	
+	@Override
 	public RepositoryStatus<List<User>> findAll() {
 		try {
 			List <User> allUsers = userRepository.findAll();
-			if (!allUsers.isEmpty()) {
-		return new RepositoryStatus<List<User>>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, allUsers);
-			} else {
-				return new RepositoryStatus<List<User>>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
-			}
+		return !allUsers.isEmpty() ? new RepositoryStatus<List<User>>(HttpStatus.OK, allUsers) : new RepositoryStatus<List<User>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (Exception exception) {
-			ExceptionStatus exceptionStatus = handleException.check(exception);
-			return new RepositoryStatus<List<User>> (exceptionStatus.getCode(), exceptionStatus.getMessage());
+			return new RepositoryStatus<List<User>> (handleException(exception));
 		}
 	}
 	
+	@Override
 	public RepositoryStatus<User> findOne (long id) {
 		try {
 			User user = userRepository.findOne(id);
-			if (user != null) {
-			return new RepositoryStatus<User>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS,		 user);
-			} else {
-				return new RepositoryStatus<User>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
-			}
+			return user != null ? new RepositoryStatus<User>(HttpStatus.OK,		 user):  new RepositoryStatus<User>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (Exception exception) {
-			ExceptionStatus exceptionStatus = handleException.check(exception);
-			return new RepositoryStatus<User> (exceptionStatus.getCode(), exceptionStatus.getMessage());
+			return new RepositoryStatus<User> (handleException(exception));
 		}
 		}
 	

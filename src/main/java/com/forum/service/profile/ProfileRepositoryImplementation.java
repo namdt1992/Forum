@@ -1,62 +1,50 @@
 package com.forum.service.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.forum.configuration.constant.HttpConstant;
 import com.forum.domain.Profile;
 import com.forum.repository.ProfileRepository;
-import com.forum.service.HandleException;
-import com.forum.util.validation.ExceptionStatus;
+import com.forum.service.AbstractService;
 import com.forum.util.validation.RepositoryStatus;
 
 @Repository
 @Transactional
-public class ProfileRepositoryImplementation implements ProfileService {
+public class ProfileRepositoryImplementation extends AbstractService implements ProfileService {
 	
 @Autowired
 private ProfileRepository profileRepository;
-@Autowired
-private HandleException handleException;
 
+@Override
 public RepositoryStatus<Profile> save (Profile profile){
 	try {
 profile = profileRepository.save(profile);
-if (profile != null) {
-return new RepositoryStatus<Profile>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, profile);
-	} else {
-		return new RepositoryStatus<Profile>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
-	}
+return profile != null ? new RepositoryStatus<Profile>(HttpStatus.OK, profile) : new RepositoryStatus<Profile>(HttpStatus.INTERNAL_SERVER_ERROR);
 	} catch (Exception exception) {
-ExceptionStatus exceptionStatus = handleException.check(exception);
-return new RepositoryStatus<Profile>(exceptionStatus.getCode(), exceptionStatus.getMessage());
+return new RepositoryStatus<Profile>(handleException(exception));
 	}
 }	
 
+@Override
 public RepositoryStatus<Boolean> delete (Long id) {
 	try {
 		profileRepository.delete(id);
-		return new RepositoryStatus<Boolean>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, Boolean.TRUE);
+		return new RepositoryStatus<Boolean>(HttpStatus.OK, true);
 	} catch (Exception exception) {
-		ExceptionStatus exceptionStatus = handleException.check(exception);
-		return new RepositoryStatus<Boolean>(exceptionStatus.getCode(), exceptionStatus.getMessage(), Boolean.FALSE);
+		return new RepositoryStatus<Boolean>(handleException(exception));
 	}
 }
 
+@Override
 public RepositoryStatus<Profile> findOne(long id) {
 	try {
 		Profile profile = profileRepository.findOne(id);
-		if (profile != null) {
-		return new RepositoryStatus<Profile>(HttpConstant.CODE_SUCCESS, HttpConstant.MESSAGE_SUCCESS, profile);
-		} else {
-			return new RepositoryStatus<Profile>(HttpConstant.CODE_SERVER_ERROR, HttpConstant.MESSAGE_SERVER_ERROR);
-		}
+		return profile != null ? new RepositoryStatus<Profile>(HttpStatus.OK, profile) : new RepositoryStatus<Profile>(HttpStatus.INTERNAL_SERVER_ERROR);
 	} catch (Exception exception) {
-		ExceptionStatus exceptionStatus = handleException.check(exception);
-		return new RepositoryStatus<Profile> (exceptionStatus.getCode(), exceptionStatus.getMessage());
+			return new RepositoryStatus<Profile> (handleException(exception));
 	}
 	}
-
 
 }

@@ -1,5 +1,8 @@
 package com.forum.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,10 +12,10 @@ import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
  * @author NamDT8
  *
  */
-
+
 public class Jackson {
 
-    public static  String java2Json(Object object, Class  <?>... viewClasses) {
+    public static  String java2Json(Object object, Class <?> ... viewClasses) {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new Hibernate5Module());
@@ -32,7 +35,7 @@ public class Jackson {
 
     return json;
 }
-/*
+    
     public static <T extends Object> T json2Java(String json, Class<T> clazz) {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -40,9 +43,9 @@ public class Jackson {
 
         try {
             t = mapper.readValue(json, clazz);
-        } catch(IOException ex) {
-            //log ex
-        }
+        } catch(IOException e) {
+        	e.printStackTrace();
+                    }
 
         return t;
     }
@@ -54,11 +57,12 @@ public class Jackson {
 
         try {
             t = mapper.readValue(json, clazz);
-        } catch(IOException ex) {
-            //log ex
+        } catch(IOException e) {
+        	e.printStackTrace();
+            
         }
 
         return t;
     }
-    */
+    
 }
