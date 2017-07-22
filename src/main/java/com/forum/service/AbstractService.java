@@ -3,13 +3,18 @@ package com.forum.service;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.forum.configuration.constant.HttpConstant;
 import com.forum.domain.AbstractEntity;
 import com.forum.util.validation.RepositoryStatus;
 import com.forum.util.view.Public;
-
+/**
+ * @author nam
+ *
+ */
+@Service
 public class AbstractService {
 
 public String findMessage (HttpStatus status) {
