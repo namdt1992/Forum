@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +35,6 @@ private UserService userRepository;
 
 @Autowired
 private AbstractService abstractService;
-
 @GetMapping(value = "/all",
 produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public ResponseEntity<String> findAll() {
@@ -42,6 +43,17 @@ public ResponseEntity<String> findAll() {
 return status.isSuccess() ?
 		new ResponseEntity<String>(Jackson.java2Json(new ResponseStatus<User>(status, abstractService.getRowCount(status), abstractService.getDataList(status)), Public.class), status.getHttpStatus())
 		: new ResponseEntity<String>(Jackson.java2Json(status), status.getHttpStatus());
+}
+
+@PostMapping(value = "/save_user",
+consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public ResponseEntity<String> save(RequestEntity<User> entity) {
+	User user = entity.getBody();
+	RepositoryStatus<Long> status = userRepository.save(user);
+	return status.isSuccess() ?
+			new ResponseEntity<String>(Jackson.java2Json(new ResponseStatus<User>(status, status.getT()), Public.class), status.getHttpStatus())
+			: new ResponseEntity<String>(Jackson.java2Json(status), status.getHttpStatus());
 }
 
 }

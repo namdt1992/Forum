@@ -11,7 +11,7 @@ import com.forum.domain.AbstractEntity;
 import com.forum.util.validation.RepositoryStatus;
 import com.forum.util.view.Public;
 /**
- * @author nam
+ * @author NamDT8
  *
  */
 @Service
@@ -22,6 +22,7 @@ public String findMessage (HttpStatus status) {
 	case OK:
 		return HttpConstant.MESSAGE_SUCCESS;
 	case BAD_REQUEST:
+
 		return HttpConstant.MESSAGE_BAD_REQUEST;
 	case NOT_FOUND:
 		return HttpConstant.MESSAGE_NOT_FOUND;
